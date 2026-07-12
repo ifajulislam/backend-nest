@@ -7,10 +7,12 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
+import { RoleGuard } from 'src/guards/role.guard';
 
 @Controller('user')
 export class UserController {
@@ -18,6 +20,7 @@ export class UserController {
 
   // All of the get queries will be here
   @Get()
+  @UseGuards(RoleGuard)
   getAllUser(@Query('name') name: string): unknown {
     return this.userService.findAllUsers(name);
   }
