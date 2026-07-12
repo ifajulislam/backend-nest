@@ -14,19 +14,8 @@ export class UserController {
   }
 
   @Get(':id')
-  getUserById(@Param('id') id: string) {
-    const users = [
-      { id: 1, name: 'Abul' },
-      { id: 2, name: 'Babul' },
-    ];
-
-    if (id) {
-      return users.filter((user) =>
-        user.name.toLowerCase().includes(id.toLowerCase()),
-      );
-    }
-
-    return users;
+  getUserById(@Param('id') id: string): unknown {
+    return this.userService.findOneUser(Number(id));
   }
 
   @Post()
